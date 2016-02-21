@@ -10,7 +10,7 @@ require 'benchmark'
 
 
 ActiveSupport.on_load :active_record do
-  require "postgres-copy/active_record"
+  require "postgres-copy/acts_as_copy_target"
 end
 ActiveRecord::Base.establish_connection(
         :adapter  => "postgresql",
@@ -24,6 +24,7 @@ ActiveRecord::Base.connection.execute %{
 }
 
 class TestModel < ActiveRecord::Base
+  acts_as_copy_target
 end
 
 encoder = PgDataEncoder::EncodeForCopy.new
