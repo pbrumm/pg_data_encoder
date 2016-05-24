@@ -191,7 +191,7 @@ module PgDataEncoder
           io.write(hash_io.string)
         end
       when Time
-        buf = [(field.to_f * 1_000_000 - POSTGRES_EPOCH_TIME).to_i].pack("L!>")
+        buf = [(field.to_f * 1_000_000 - POSTGRES_EPOCH_TIME).to_i].pack("Q!>")
         io.write([buf.bytesize].pack("N"))
         io.write(buf)
       when Date
